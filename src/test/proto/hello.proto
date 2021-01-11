@@ -1,0 +1,51 @@
+syntax = "proto3";
+
+// PLEASE READ: If you change this file, you need to run a successful test of ProtoVisualExporterPluginTest to generate a new
+// descriptor_dump file which is then consumed by the test itself. Make sure to copy it from /target/generated-sources/protobuf/java
+// to test/java/resources.
+
+option java_multiple_files = false;
+package hello;
+
+// Hello Service
+service Hello {
+    // Hello RPC
+    rpc hello(Request) returns (Response);
+}
+
+// Hello Request
+message Request {
+    // Name
+    string name = 1;
+    // Order
+    Order order = 2;
+}
+
+// Hello Response
+message Response {
+    string haha = 1;
+    oneof response_oneof {
+        Greeting greeting = 2;
+        string error = 3;
+    }
+    oneof test_oneof {
+        string blah1 = 4;
+        string blah2 = 5;
+    }
+}
+
+message Order {
+    string id = 1;
+    OrderType orderType = 2;
+}
+
+message Greeting {
+    string name = 1;
+    string title = 2;
+}
+
+enum OrderType {
+    ORDER_TYPE_INVALID = 0;
+    ORDER_TYPE_HOTEL = 1;
+    ORDER_TYPE_FLIGHT = 2;
+}
